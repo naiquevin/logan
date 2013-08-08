@@ -5,20 +5,15 @@ from werkzeug.contrib.cache import FileSystemCache
 import tasks
 
 
-# configuration
-BROKER_URL = 'amqp://logan:123456@localhost:5672/logan'
-LOG_FILE_TO_ANALYZE = '/home/vineet/errorlogs2/kodecrm_prod/kodecrm_apache2/kodecrm-05Jul.json'
-URL_PATTERNS_FILE = '/home/vineet/devutils/vineet_tools/.config/logan_dynamic_patterns.json'
-SECRET_KEY = 'my-secret'
-
-
 # app instance
 app = Flask(__name__)
 app.config.from_object(__name__)
 
+# configuration
+app.config.from_envvar('LOGAN_SETTINGS')
+
 # cache instance
 cache = FileSystemCache('./cache')
-
 
 # views 
 @app.route('/')

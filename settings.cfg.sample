@@ -1,0 +1,5 @@
+# Logan Configuration
+BROKER_URL = 'amqp://logan:123456@localhost:5672/logan'
+-LOG_FILE_TO_ANALYZE = '/home/vineet/errorlogs2/kodecrm_prod/kodecrm_apache2/kodecrm-05Jul.json'
+-URL_PATTERNS_FILE = '/home/vineet/devutils/vineet_tools/.config/logan_dynamic_patterns.json'
+-SECRET_KEY = 'my-secret'
