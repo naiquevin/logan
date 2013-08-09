@@ -32,8 +32,12 @@ footer {
 }
 
 ul.legend {
-    float: left;
+    float: right;
     list-style: none;
+    overflow-y: scroll;
+    height: 400px;
+    margin-left: 10px;
+    font-size: 12px;
 }
 
 ul.legend li div {
@@ -49,7 +53,7 @@ ul.legend li span {
     margin-left: 5px;
 }
 
-ul.graphContainers li {
+ul.graphContainers > li {
     list-style: none;
     width: 48%;
     float: left;
@@ -59,7 +63,7 @@ ul.graphContainers li {
     border: 1px solid #ccc;
 }
 
-ul.graphContainers li h5 {
+ul.graphContainers > li h5 {
     margin: 0;
     padding: 6px 12px;
     background: #f7f7f7;
@@ -67,6 +71,6 @@ ul.graphContainers li h5 {
     color: #666;
 }
 
-ul.graphContainers li .graph {
+ul.graphContainers > li .graph {
     margin: 20px;
 }
