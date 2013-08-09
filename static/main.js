@@ -1,7 +1,8 @@
 (function (window, d3utils) {
     "use strict";
-    
-    var $box_url_hits = $(".graph[rel='url-hits']").parent();    
+
+    var $box_url_hits = $(".graph[rel='url-hits']").parent();
+    var $box_browsers = $(".graph[rel='browsers']").parent();
 
     var urlHits = function () {
         $box_url_hits.spin();
@@ -22,9 +23,27 @@
         return defobj;
     };
 
+    var browsers = function () {
+        $box_browsers.spin();
+        var defobj = $.getJSON('/browsers');
+        defobj.done(function (data) {
+            if (data['ready']) {
+                $box_browsers.spin(false);
+                var keys = d3.keys(data['browsers']);
+                var values = d3.values(data['browsers']);
+                d3utils.pieChart(".graph[rel='browsers']", values, keys, {
+                    pieWidth: 270,
+                    pieHeight: 270,
+                    legend: d3utils.legend($(".graph[rel='browsers']"))
+                });
+            }
+        });
+        return defobj;
+    };
+
     var getAnalytics = function () {
-        $.when(urlHits()).done(function (data) {
-            console.log(data);
+        $.when(urlHits(), browsers()).done(function () {
+            console.log('done');
         });
     };
 

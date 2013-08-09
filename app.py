@@ -38,6 +38,23 @@ def url_hits():
         return jsonify({'ready': True, 'url_hits': urlhits})
 
 
+@app.route('/browsers')
+def browsers():
+    browsers = cache.get('browsers')
+    if browsers is None:
+        task_id = session.get('task-browsers')
+        if task_id is None:
+            t = tasks.browsers.delay()
+            session['task-browsers'] = t.task_id
+        return jsonify({'ready': False})
+    else:
+        # task_id needs to be cleared from the session so that when
+        # cache is timed out, url_hits function is again called and
+        # it's results are cached
+        task_id = session.pop('task-browsers', None)
+        return jsonify({'ready': True, 'browsers': browsers})
+
+
 @app.route('/ready')
 def check_if_ready():
     ready_tasks = [k for
