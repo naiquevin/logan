@@ -15,7 +15,7 @@ app.config.from_envvar('LOGAN_SETTINGS')
 # cache instance
 cache = FileSystemCache('./cache')
 
-# views 
+# views
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -58,7 +58,7 @@ def browsers():
 @app.route('/ready')
 def check_if_ready():
     ready_tasks = [k for
-                   k, v in session.iteritems() 
+                   k, v in session.iteritems()
                    if k.startswith('task-') and tasks.is_ready(v)]
     for task in ready_tasks:
         session.pop(task)
